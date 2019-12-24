@@ -1,5 +1,5 @@
 /**
- * This script contains the client-side validation procedures
+ * This script contains the client-side validation procedures for the regisration page.
  */
  // -------------------------------------------------------------------------------------------------------------
  /**
