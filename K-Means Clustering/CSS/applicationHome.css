@@ -1,0 +1,213 @@
+@import url("homePage.css");
+.description fieldset {
+  border: none;
+}
+
+.description .centralized-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.description input[type="text"] {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  margin: 0 auto;
+  width: 275px;
+  font-size: 24px;
+}
+
+.description input[type="text"]:focus {
+  outline: none;
+  border-color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+  cursor: none;
+}
+
+.description input[type="text"]:focus::-webkit-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:focus:-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:focus::-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:focus::placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:hover {
+  border-color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:hover::-webkit-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:hover:-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:hover::-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]:hover::placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description input[type="text"]::-webkit-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 24px;
+}
+
+.description input[type="text"]:-ms-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 24px;
+}
+
+.description input[type="text"]::-ms-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 24px;
+}
+
+.description input[type="text"]::placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 24px;
+}
+
+.description input[type="radio"] {
+  position: fixed;
+  left: -100px;
+}
+
+.description input[type="file"] {
+  height: 0.1px;
+  width: 0.1px;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.description .train input {
+  display: block;
+  padding: 20px;
+}
+
+.description label:not([class="uploader-wrapper"]) {
+  font-size: 68px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.description label[class="model-submit"] {
+  font-size: 16px !important;
+}
+
+.description input[type="submit"] {
+  display: none !important;
+}
+
+.description input[type="radio"]:checked + label {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description label.uploader-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  display: inline-block;
+  width: 263px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.description .functionality {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.description label:hover {
+  cursor: pointer;
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description label.uploader-wrapper:hover {
+  border: 1px solid black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+.description .submission-area label {
+  position: absolute;
+  padding: 35px;
+  bottom: 2px;
+  right: 105px;
+  color: black !important;
+}
+
+.description .submission-area label:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: 350ms ease;
+  transition: 350ms ease;
+}
+
+.description .content p#disclaimer {
+  font-size: 16px !important;
+  position: absolute !important;
+  left: 150px;
+  bottom: 5px;
+}
+/*# sourceMappingURL=applicationHome.css.map */

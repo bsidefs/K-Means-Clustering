@@ -1,0 +1,132 @@
+html {
+  background-color: #f8e2bf;
+}
+
+body {
+  font-family: din-condensed, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+/*
+ * main container configurations
+*/
+.container {
+  color: black;
+}
+
+/*
+ * navbar titles container configurations
+*/
+header .nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header .left-side-title {
+  position: absolute;
+  left: 15px;
+  font-size: 25px;
+}
+
+header .left-side-title h1 {
+  border-bottom: 3px solid black;
+  padding: 5px;
+}
+
+header .right-side-title {
+  position: absolute;
+  right: 15px;
+  font-size: 16.5px;
+}
+
+header .right-side-title h1 {
+  border-bottom: 3px solid black;
+  padding: 5px;
+}
+
+header ul {
+  list-style: none;
+  font-size: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+header ul li {
+  padding: 15px;
+}
+
+header ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+header ul li a::after {
+  content: '';
+  display: block;
+  position: relative;
+  width: 0;
+  height: 3px;
+  left: -3.5px;
+  bottom: 17px;
+  background: #ffcb6b;
+}
+
+header ul li a.active::after {
+  width: 110%;
+}
+
+header ul li a:hover::after {
+  width: 110%;
+  -webkit-transition: width 300ms;
+  transition: width 300ms;
+}
+
+/*
+ * main-content SECTION container configurations
+*/
+#landing-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#landing-page .container {
+  height: 65vh;
+  background-color: #ffcb6b;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 35px;
+}
+
+#landing-page .landing-title {
+  font-size: 45px;
+}
+
+#landing-page p {
+  font-size: 24px;
+}
+
+#landing-page p.indented {
+  text-indent: 20px;
+}
+
+#landing-page p#note {
+  font-size: 16px;
+}
+
+#landing-page p#note span {
+  text-decoration: underline;
+}
+/*# sourceMappingURL=homePage.css.map */

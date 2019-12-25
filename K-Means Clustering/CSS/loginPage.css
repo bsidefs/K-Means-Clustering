@@ -1,0 +1,148 @@
+@import url("homePage.css");
+fieldset {
+  border: none;
+}
+
+fieldset input:not([type="submit"]) {
+  height: 40px;
+  width: 250px;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  padding: 25px;
+  background-color: transparent;
+  margin: 25px;
+  font-size: 28px;
+}
+
+fieldset input:not([type="submit"]):focus {
+  outline: none;
+  border-color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+  cursor: none;
+}
+
+fieldset input:not([type="submit"]):focus::-webkit-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):focus:-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):focus::-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):focus::placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):hover {
+  border-color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):hover::-webkit-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):hover:-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):hover::-ms-input-placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"]):hover::placeholder {
+  color: black;
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+fieldset input:not([type="submit"])::-webkit-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 26px;
+}
+
+fieldset input:not([type="submit"]):-ms-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 26px;
+}
+
+fieldset input:not([type="submit"])::-ms-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 26px;
+}
+
+fieldset input:not([type="submit"])::placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  font-size: 26px;
+}
+
+fieldset input[type="submit"] {
+  display: none;
+  background: transparent;
+  font-size: 0px;
+  font-style: italic;
+  cursor: pointer;
+}
+
+fieldset input[type="submit"]:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: 350ms ease;
+  transition: 350ms ease;
+}
+
+fieldset .submission-area label {
+  position: absolute;
+  padding: 35px;
+  bottom: 27.5px;
+  right: 105px;
+}
+
+fieldset .submission-area label:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: 350ms ease;
+  transition: 350ms ease;
+}
+
+#landing-page .container .description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=loginPage.css.map */
