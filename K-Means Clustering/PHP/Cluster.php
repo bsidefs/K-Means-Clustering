@@ -6,14 +6,12 @@ class Cluster
 {
     // Properties ------------------------------------------------
     private $cluster_value;
-    private $mean_value;
     private $associated_data_points;
 
     // Constructor ----------------------------------------------------
     public function __construct($cluster_value)
     {
-        $this->cluster_value = $cluster_value;
-        $this->mean_value = 0;
+        $this->cluster_value = (int) $cluster_value;
         $this->associated_data_points = array();
     }
 
@@ -23,7 +21,15 @@ class Cluster
      */
     public function add($data_point)
     {
-        $this->associated_data_points = $data_point;
+        $this->associated_data_points[] = (int) $data_point;
+    }
+
+    /**
+     * Clears $this Cluster's list of associated data points after each tabulation and cluster value update.
+     */
+    public function clear_associated_data_points()
+    {
+        $this->associated_data_points = array();
     }
 
 
@@ -32,15 +38,20 @@ class Cluster
      */
     public function update_cluster_value()
     {
-        $updated_counter = 1; // staring at one, as the initial Cluster's $cluster_value must be included within the mean calculation
+        $updated_counter = 0; // staring at one, as the initial Cluster's $cluster_value must be included within the mean calculation
         // but is not an actual part of the $this Cluster's list of $associated_data_points.
+        $new_mean = 0;
         foreach($this->associated_data_points as $data_point)
         {
-            $this->cluster_value += $data_point;
+            $new_mean += $data_point;
             $updated_counter++;
         }
-        $this->$cluster_value = (($this->cluster_value) / ($updated_counter));
+        $this->cluster_value = $new_mean;
+        $this->cluster_value = (($this->cluster_value) / ($updated_counter));
     }
+
+
+     //----------------- Getter Methods --------------
 
 
     /**
