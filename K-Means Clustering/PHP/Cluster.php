@@ -24,6 +24,7 @@ class Cluster
         $this->associated_data_points[] = (int) $data_point;
     }
 
+    
     /**
      * Clears $this Cluster's list of associated data points after each tabulation and cluster value update.
      */
