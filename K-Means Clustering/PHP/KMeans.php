@@ -2,6 +2,7 @@
 /**
  * Class used for performing the K-Means Based Clustering ML algorithm
  */
+
 class KMeans
 {
     // Properties ------------------------------------------------
@@ -28,15 +29,18 @@ class KMeans
      */
     public function initialize_clusters()
     {
-        $this->cluster_set[] = new Cluster(4);
-        $this->cluster_set[] = new Cluster(11);
-        /*
+        // see the use of this variable below (*)
+        $temporary_randomized_indices = array();
         for ($i = 0; $i < $this->num_clusters; $i++)
         {
             $randomized_index = mt_rand(0,(count($this->data_set) - 1));
-            $this->cluster_set[] = new Cluster($this->data_set[$randomized_index]);
+            if ($this->data_set[$randomized_index] != 0 && (!(in_array($randomized_index,$temporary_randomized_indices))))
+            {
+                $this->cluster_set[] = new Cluster($this->data_set[$randomized_index]);
+            }
+            // (*) used to prevent the same $data_set point from being used for any subsequent Cluster values.
+            $temporary_randomized_indices[] = $randomized_index;
         }
-        */
     }
 
 
@@ -192,19 +196,23 @@ class KMeans
     }
 
     /**
-     * Outputs the final clustering to the logged in user once it has been achieved.
+     * Retrieves and returns the final clustering once it has been achieved.
      */
     public function write_solution_to_file()
     {
         $filename = "solutions.txt";
+
         // creating a .txt file to hold the solutions to the clustering
-        $fh = fopen($filename, 'w') or die("Failed to open/create a new solutions file.");
+        //$fh = fopen($filename, 'w') or die("Failed to open/create a new solutions file.");
 
         // indices start at 0, but logically speaking, the first cluster should be labeled as Cluster "1", and not Cluster "0."
         $cluster_number = 1;
         for ($i = 0; $i < count($this->cluster_set); $i++)
         {
-            fwrite($fh,"Cluster $cluster_number (" . $this->cluster_set[$i]->get_cluster_value() . "): { ");
+            $beginning_output = "Cluster $cluster_number (" . $this->cluster_set[$i]->get_cluster_value() . "): {";
+            echo $beginning_output;
+
+            $cluster_contents = "";
 
             $k_means_solution = array();
             $k_means_solution[] = $this->cluster_set[$i]->get_associated_data_points();
@@ -212,13 +220,21 @@ class KMeans
             {
                 for ($j = 0; $j < count($partial_solution); $j++)
                 {
-                    fwrite($fh,"$partial_solution[$j] ");
+                    $cluster_contents .= "$partial_solution[$j], ";
                 }
+                $cluster_contents = rtrim($cluster_contents," ,");
+                echo $cluster_contents;
             }
-            fwrite(PHP_EOL);
+
+            $ending_output = "}"; //. PHP_EOL;
+            echo $ending_output;
+            echo "<br>";
             $cluster_number++;
         }
-
+        // closing the solutions file
+        //fclose($fh);
+        
+        /*
         if (file_exists($filename)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -229,9 +245,7 @@ class KMeans
             header('Content-Length: ' . filesize($file));
             readfile($file);
         }
-
-        // closing the solutions file
-        fclose($fh);
+        */
 
         // terminating the now completed script;
         exit;
