@@ -7,6 +7,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -23,7 +27,7 @@
   outline: none;
   padding: 5px;
   margin: 0 auto;
-  width: 275px;
+  width: 250px;
   font-size: 24px;
 }
 
@@ -130,9 +134,15 @@
   z-index: -1;
 }
 
-.description .train input {
+.description .train input[type="file"] {
   display: block;
+  padding: 25px;
+}
+
+.description .train input {
+  display: inline;
   padding: 20px;
+  margin: 25px;
 }
 
 .description label:not([class="uploader-wrapper"]) {
@@ -157,8 +167,16 @@
 .description label.uploader-wrapper {
   border: 1px solid rgba(0, 0, 0, 0.4);
   padding: 5px;
-  display: inline-block;
-  width: 263px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 500px;
   text-align: center;
   color: rgba(0, 0, 0, 0.4);
 }
@@ -173,6 +191,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 5px;
 }
 
 .description label:hover {
@@ -192,7 +211,7 @@
   position: absolute;
   padding: 35px;
   bottom: 2px;
-  right: 105px;
+  right: 125px;
   color: black !important;
 }
 
@@ -204,10 +223,14 @@
   transition: 350ms ease;
 }
 
+.description .far {
+  width: 25px;
+}
+
 .description .content p#disclaimer {
   font-size: 16px !important;
   position: absolute !important;
   left: 150px;
-  bottom: 5px;
+  bottom: 7px;
 }
 /*# sourceMappingURL=applicationHome.css.map */
