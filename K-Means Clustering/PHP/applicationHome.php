@@ -12,7 +12,6 @@
  if ($conn->connect_error) die(my_sql_fatal_error());
  // used to hold the values for the k-means algorithm // easy way out for just right here and or and or right here and or and right now
  $scores_to_input = array();
- $ready_to_test = false;
 
  // setting a max timeout on the session here
  ini_set("session.gc_maxlifetime", (60*60*24));
@@ -43,66 +42,34 @@
 
     // upon the page reload, check for the contents of the form submission
 
-    // code for handling "training" uploads
-    if (isset($_FILES["train-model-file"]) && isset($_POST["train-model-name"]))
+    // code for handling score uploads
+    if (isset($_FILES["model-file"]) && isset($_POST["model-name"]) && isset($_POST["num-clusters"]))
     {
-        $fileName = $_FILES["train-model-file"]["name"];
-        $fileType = $_FILES["train-model-file"]["type"];
+        $fileName = $_FILES["model-file"]["name"];
+        $fileType = $_FILES["model-file"]["type"];
         if (check_file_integrity($fileType))
         {
             $modelScores = fix_string($conn,file_get_contents($fileName));
-            $modelName = fix_string($conn,$_POST["train-model-name"]);
+            $modelName = fix_string($conn,$_POST["model-name"]);
+            $number_of_clusters = fix_string($conn,$_POST["num-clusters"]);
 
-            $statement = $conn->prepare("INSERT INTO userModels VALUES(?,?,?)");
-            $statement->bind_param('sss',$username,$modelName,$modelScores);
+            $scores_to_input = preg_split("/[,]/",$modelScores);
 
-            $statement->execute();
-            if (!($statement->affected_rows) > 0)
-            {
-                echo my_sql_fatal_error();
-                $statement->close();
-            }
-            else
-            {
-                $statement->close();
-                $ready_to_test = true;
-            }
+            // performing the clustering
+            perform_clustering_algorithm($scores_to_input,$number_of_clusters);
         }
     }
-    if (isset($_POST["train-model-scores"]) && isset($_POST["train-model-name"]))
+    if (isset($_POST["model-scores"]) && isset($_POST["model-name"]) && isset($_POST["num-clusters"]))
     {
-        $modelScores = fix_string($conn,$_POST["train-model-scores"]);
+        $modelScores = fix_string($conn,$_POST["model-scores"]);
+        $modelName = fix_string($conn,$_POST["model-name"]);
+        $number_of_clusters = fix_string($conn,$_POST["num-clusters"]);
+
         $scores_to_input = preg_split("/[,]/",$modelScores);
-        $modelName = fix_string($conn,$_POST["train-model-name"]);
-        $statement = $conn->prepare("INSERT INTO userModels VALUES(?,?,?)");
-        $statement->bind_param('sss',$username,$modelName,$modelScores);
 
-        $statement->execute();
-        if (!($statement->affected_rows) > 0)
-            {
-                echo my_sql_fatal_error();
-                $statement->close();
-            }
-            else
-            {
-                $statement->close();
-                $ready_to_test = true;
-            }
+        // performing the clustering
+        perform_clustering_algorithm($scores_to_input, $number_of_clusters);
     }
-
-    // code for handling "testing" uploads
-
-    //  --------------- code for performing the k-means based clustering algorithm ---------------------------------
-    if ($ready_to_test)
-    {
-        $kMeans = new KMeans($scores_to_input,2);
-        $kMeans->initialize_clusters();
-        $kMeans->perform_k_means();
-        $kMeans->write_solution_to_file();
-    }
-
-    // -------------------- end of the code for performing the k-means based clustering algorithm  -------------------------------
-
  }
  else
  {
@@ -124,6 +91,17 @@
         return false;
     else
         return true;
+ }
+
+ /**
+  * Triggers the k-means based clustering algorithm.
+  */
+ function perform_clustering_algorithm($scores_to_input,$number_of_clusters)
+ {
+    $kMeans = new KMeans($scores_to_input,$number_of_clusters);
+    $kMeans->initialize_clusters();
+    $kMeans->perform_k_means();
+    $kMeans->write_solution_to_file();
  }
 
  /**
@@ -174,36 +152,21 @@ function display_functional_application($username)
                         });
                     </script>
 
-                    <!-- show proper train/test functionalities-->
+                    <!-- show proper "cluster data" functionality-->
                     <script>
                         $(document).ready(function()
                         {
+                            $(".uploader-wrapper").hide();
                             $(".train").hide();
-                            $(".test").hide();
                             $(".submission-area label").hide();
                             $(".content p").hide();
-                            var radioButtons = $("input[type='radio']");
-                            radioButtons.on("change", function()
+                            var radioButton = $("input[type='radio']");
+                            radioButton.click(function()
                             {
-                                switch($(this).attr("id"))
-                                {
-                                    case "training": (function()
-                                    {
-                                        $(".submission-area label").hide();
-                                        $(".test").hide();
-                                        $(".content p").fadeIn(1050);
-                                        $(".train").fadeIn(1050);
-                                        $(".submission-area label").fadeIn(1050);
-                                    }());
-                                        break;
-                                    case "testing": (function()
-                                    {
-                                        $(".submission-area label").hide();
-                                        $(".train").hide();
-                                        $(".test").fadeIn(1050);
-                                        $(".submission-area label").fadeIn(1050);
-                                    }());
-                                }
+                                $(".content p").fadeIn(1050);
+                                $(".uploader-wrapper").fadeIn(1050);
+                                $(".train").fadeIn(1050);
+                                $(".submission-area label").fadeIn(1050);
                             });
                         });
                     </script>
@@ -249,20 +212,15 @@ function display_functional_application($username)
                                         <fieldset>
                                             <div class="centralized-content">
                                                 <input id="training" type="radio" name="user-option" value="Train" autocomplete="off">
-                                                <label id="train-label" for="training">Train</label>
-                                                <input id="testing" type="radio" name="user-option" value="Test" autocomplete="off">
-                                                <label id="test-label" for="testing">Test</label>
+                                                <label id="train-label" for="training">Cluster Data</label>
+                                                <input id="train-file-uploader" type="file" name="model-file">
+                                                <label class="uploader-wrapper" for="train-file-uploader"><i class="far fa-file-alt"></i> Upload a Model</label>
                                             </div>
                                             <div class="functionality">
                                                 <div class="train">
-                                                    <input id="train-file-uploader" type="file" name="train-model-file">
-                                                    <label class="uploader-wrapper" for="train-file-uploader"><i class="far fa-file-alt"></i> Upload a Model</label>
-                                                    <input type="text" name="train-model-scores" placeholder="input scores">
-                                                    <input type="text" name="train-model-name" placeholder="model name">
-                                                </div>
-                                                <div class="test">
-                                                    <input id="test-file-uploader" type="file" name="test-model-file">
-                                                    <label class="uploader-wrapper" for="test-file-uploader"><i class="far fa-file-alt"></i> Upload a Model</label>
+                                                    <input type="text" name="model-scores" placeholder="input scores">
+                                                    <input type="text" name="model-name" placeholder="model name">
+                                                    <input type="text" name="num-clusters" placeholder="number of clusters">
                                                 </div>
 
                                                 <div class="submission-area">
