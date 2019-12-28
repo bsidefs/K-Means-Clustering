@@ -203,14 +203,14 @@ class KMeans
         $filename = "solutions.txt";
 
         // creating a .txt file to hold the solutions to the clustering
-        //$fh = fopen($filename, 'w') or die("Failed to open/create a new solutions file.");
+        $fh = fopen($filename, 'w') or die("Failed to open/create a new solutions file.");
 
         // indices start at 0, but logically speaking, the first cluster should be labeled as Cluster "1", and not Cluster "0."
         $cluster_number = 1;
         for ($i = 0; $i < count($this->cluster_set); $i++)
         {
             $beginning_output = "Cluster $cluster_number (" . $this->cluster_set[$i]->get_cluster_value() . "): {";
-            echo $beginning_output;
+            fwrite($fh,$beginning_output);
 
             $cluster_contents = "";
 
@@ -223,18 +223,16 @@ class KMeans
                     $cluster_contents .= "$partial_solution[$j], ";
                 }
                 $cluster_contents = rtrim($cluster_contents," ,");
-                echo $cluster_contents;
+                fwrite($fh,$cluster_contents);
             }
 
-            $ending_output = "}"; //. PHP_EOL;
-            echo $ending_output;
-            echo "<br>";
+            $ending_output = "}" . PHP_EOL;
+            fwrite($fh,$ending_output);
             $cluster_number++;
         }
         // closing the solutions file
-        //fclose($fh);
+        fclose($fh);
         
-        /*
         if (file_exists($filename)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -245,7 +243,6 @@ class KMeans
             header('Content-Length: ' . filesize($file));
             readfile($file);
         }
-        */
 
         // terminating the now completed script;
         exit;
