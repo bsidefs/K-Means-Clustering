@@ -1,6 +1,6 @@
 <?php
 /**
- * Class used for performing the K-Means Based Clustering ML algorithm
+ * Class used for performing the K-Means Based Clustering ML Algorithm
  */
 
 class KMeans
@@ -95,7 +95,7 @@ class KMeans
 
 
     /**
-     * Defines for each $data_set point value the distances to each Cluster and its nearest, or "assigned," cluster.
+     * Defines for each $data_set point value the distances to each Cluster and its nearest, or "assigned," Cluster.
      */
     public function perform_tabulation()
     {
@@ -166,7 +166,7 @@ class KMeans
 
 
     /**
-     * Identifies the cluster which is closest to the current $data_set point value.
+     * Identifies the Cluster which is closest to the current $data_set point value.
      */
     public function identify_nearest_cluster($distances)
     {
@@ -196,7 +196,7 @@ class KMeans
     }
 
     /**
-     * Retrieves and returns the final clustering once it has been achieved.
+     * Writes the final clustering to a file once it has been achieved and then presents the file download to the user.
      */
     public function write_solution_to_file()
     {
@@ -233,6 +233,7 @@ class KMeans
         // closing the solutions file
         fclose($fh);
         
+        // presenting the file download to the user
         if (file_exists($filename)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -244,7 +245,7 @@ class KMeans
             readfile($file);
         }
 
-        // terminating the now completed script;
+        // terminating the now completed script
         exit;
     }
 

@@ -10,7 +10,7 @@
 
  $conn = new mysqli($hn,$un,$pw,$db);
  if ($conn->connect_error) die(my_sql_fatal_error());
- // used to hold the values for the k-means algorithm // easy way out for just right here and or and or right here and or and right now
+ // array used to hold the values for the k-means algorithm / xampp throws a warning for undeclared variables
  $scores_to_input = array();
 
  // setting a max timeout on the session here
@@ -33,9 +33,6 @@
         $_SESSION["check"] == hash("ripemd128", $_SERVER["REMOTE_ADDR"].$_SERVER["HTTP_USER_AGENT"])) // additional security check
  {
     $username = $_SESSION["username"];
-
-    // did not destroy the session here (unlike the example in class), because this script will have to re-run once the form down 
-    // below in the functional version is submitted. the function is called, however, at least once within the script (later on).
 
     // if the second check, more specifically, passed, then the user is safe and we can display the appropriate page contents
     display_functional_application($username);
@@ -93,6 +90,7 @@
         return true;
  }
 
+
  /**
   * Triggers the k-means based clustering algorithm.
   */
@@ -103,6 +101,7 @@
     $kMeans->perform_k_means();
     $kMeans->write_solution_to_file();
  }
+
 
  /**
  * A handy function to destroy a PHP Session and its data.
@@ -116,6 +115,7 @@ function destory_session_and_data()
     // destroying the session
     session_destroy();
 }
+
 
 /**
  * Displays a functional version of the application's homepage when the user is logged in.
@@ -246,6 +246,7 @@ function display_functional_application($username)
             </html>
 _FINISH;
 }
+
 
 /**
  * Displays a non-functional version of the application's homepage when the page is navigated to prior to logging in.
