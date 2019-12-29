@@ -8,16 +8,10 @@ body {
   font-weight: 300;
 }
 
-/*
- * main container configurations
-*/
 .container {
   color: black;
 }
 
-/*
- * navbar titles container configurations
-*/
 header .nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -92,9 +86,6 @@ header ul li a:hover::after {
   transition: width 300ms;
 }
 
-/*
- * main-content SECTION container configurations
-*/
 #landing-page {
   display: -webkit-box;
   display: -ms-flexbox;
