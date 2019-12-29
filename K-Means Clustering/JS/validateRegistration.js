@@ -23,6 +23,7 @@
     }
  }
 
+
  /**
   * Validates a user's inputted username.
   * 
@@ -37,6 +38,7 @@
 
     return "";
  }
+
 
  /**
   * Validates a user's inputted email.
@@ -54,6 +56,7 @@
 
     return "";
  }
+ 
  
  /**
   * Validates a user's inputted password.
