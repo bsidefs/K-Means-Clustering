@@ -102,6 +102,7 @@ _FINISH;
 
 // calling the register page functions
 create_user($conn);
+
 // closing the now finished MySQL connection
 $conn->close();
 
@@ -115,24 +116,30 @@ function create_user($conn)
     {
         // creating a random salt for the user currently being added to the database
         $salt = random_int(PHP_INT_MIN, PHP_INT_MAX);
+
         // preparing and executing the query
         $statement = $conn->prepare("INSERT INTO users VALUES(?,?,?,?)");
         $statement->bind_param('sssi',$username,$email,$token,$salt);
+
         // initializing the statement parameters
         $username = fix_string($conn,$_POST["username"]);
         $email    = fix_string($conn,$_POST["email"]);
         $password = fix_string($conn,$_POST["password"]);
+
         // statement parameters are now sanitized, but now we must validate them
         $fail = null;
         $fail .= validate_username($conn,$username);
         $fail .= validate_email($conn,$email);
         $fail .= validate_password($password);
+
         // lastly, if everything has now successfully been sanitized and validated, hash and salt the password, and then execute the query
         if ($fail == "")
         {
             $token = hash("ripemd128", $salt.$password);
+
             // execute the query
             $statement->execute();
+
             // ensure the statement was properly executed
             if (!($statement->affected_rows > 0))
                 echo my_sql_fatal_error();
@@ -154,6 +161,7 @@ function create_user($conn)
     }
 }
 
+
 /**
  * Validates a user's inputted username (not only for proper contents, but ensures that only one account may be associated with that username).
  */
@@ -168,6 +176,7 @@ function validate_username($conn,$field)
         return "&#8226" . "An account with that username already exists.<br>";
     return "";
 }
+
 
 /**
  * Validates a user's inputted email (not only for proper contents, but ensures that the email may only be associated with a single account)
@@ -186,6 +195,7 @@ function validate_email($conn,$field)
     return "";
 }
 
+
 /**
  * Validates a user's inputted password.
  */
@@ -199,6 +209,7 @@ function validate_password($field)
         return "&#8226" . "Passwords must contain only the following characters: a-z, A-Z, 0-9, and !<br>";
     return "";
 }
+
 
 /**
  * Outputs a message signifying a successful account/user registration.
